@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        input.op{
+            width: 60px;
+            height: 50px;
+        }
+        form#form{
+            position: relative;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+        table#table{
+            position: relative;
+            align-items: center;
+            text-align: center;
+        }
+        table#table td{
+            margin: 2px;
+            padding: 1px;
+            text-align: center;            
+        }
+        input#inicio{
+            width: 30px;
+        }
+    </style>
+
+    <title>Jogo da Vida</title>
+</head>
+<body>
+    <h1>Jogo da Vida</h1>
+    <form id="form">
+        <fieldset>
+            <legend>Jogo</legend>
+            <table id="table">
+                <tr>
+                    <td><input type="color" name="11" id="11" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="12" id="12" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="13" id="13" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="14" id="14" value="#B22222" list="colors" class="op"></td>
+                </tr>
+                <tr>
+                    <td><input type="color" name="21" id="21" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="22" id="22" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="23" id="23" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="24" id="24" value="#B22222" list="colors" class="op"></td>
+                </tr>
+                <tr>
+                    <td><input type="color" name="31" id="31" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="32" id="32" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="33" id="33" value="#B22222" list="colors" class="op"></td>
+                    <td><input type="color" name="34" id="34" value="#B22222" list="colors" class="op"></td>
+                </tr>
+
+                <datalist id="colors">
+                    <option>#7CFC00</option>
+                    <option>#B22222</option>
+                </datalist>
+            </table>
+        </fieldset>
+        <input type="reset" value="Resetar o Jogo">
+        <button onclick="setEstado('1')">Inicio</button>
+        <button onclick="setEstado('0')">Stop</button>
+    </form>
+
+    <script>
+        var cor1 = "#B22222";
+        var cor2 = "#7CFC00";
+        function setEstado(a){
+            var estado = a;
+            if(estado == 1){
+                while((document.getElementById('11').value == cor1 && document.getElementById('12').value == cor1 && document.getElementById('13').value == cor1 && document.getElementById('14').value == cor1 && document.getElementById('21').value == cor1 && document.getElementById('22').value == cor1 && document.getElementById('23').value == cor1 && document.getElementById('24').value == cor1 && document.getElementById('31').value == cor1 && document.getElementById('32').value == cor1 && document.getElementById('33').value == cor1 && document.getElementById('34').value == cor1)){
+                    
+                        //Teste celula 11
+                        if (document.getElementById('11').value == cor2) {
+                            if ((document.getElementById('12').value) == cor2 && document.getElementById('21').value == cor2) {
+                                document.getElementById('11').value = cor2;
+                            }else{
+                                document.getElementById('11').value = cor1;
+                            }   
+                        }
+                        //Fim teste 
+                        //Teste Celula 12
+                        if (document.getElementById('12').value == cor2) {
+                            if ((document.getElementById('11').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('13').value == cor1) || (document.getElementById('22').value == cor2 && document.getElementById('13').value == cor2 && document.getElementById('11').value == cor1) || (document.getElementById('11').value == cor2 && document.getElementById('13').value == cor2 && document.getElementById('22').value == cor1)) {
+                                document.getElementById('12').value = cor2;
+                            }else if (document.getElementById('11').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('13').value == cor2) {
+                                document.getElementById('12').value = cor2;
+                            }else{
+                                document.getElementById('12').value = cor1;
+                            }
+    
+                        }else{
+                            if (document.getElementById('11').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('13').value == cor2) {
+                                document.getElementById('12').value = cor2;
+                            }
+                        }
+                        //fim teste
+                        //Teste celula 13
+                        if (document.getElementById('13').value == cor2) {
+                            if ((document.getElementById('12').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('14').value == cor1)||(document.getElementById('13').value == cor2 && document.getElementById('14').value == cor2 && document.getElementById('12').value == cor1) || (document.getElementById('12').value == cor2 && document.getElementById('14').value == cor2 && document.getElementById('23').value == cor1)) {
+                                document.getElementById('13').value = cor2;
+                            }else if(document.getElementById('12').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('14').value == cor2){
+                                document.getElementById('13').value = cor2;
+                            }else{
+                                document.getElementById('13').value = cor1;
+                            }                            
+                        }else{
+                            if (document.getElementById('12').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('14').value == cor2) {
+                                document.getElementById('13').value = cor2;                                
+                            }
+                        }
+                        //Fim teste
+                        //Teste Celula 14
+                        if (document.getElementById('14').value == cor2) {
+                            if (document.getElementById('13').value == cor2 && document.getElementById('24').value == cor2) {
+                                document.getElementById('14').value = cor2;
+                            }else{
+                                document.getElementById('14').value = cor1; 
+                            }
+                        }
+                        //Fim Teste
+                        //Teste Celula 21
+                        if (document.getElementById('21').value == cor2) {
+                            if ((document.getElementById('11').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('31').value == cor1)||(document.getElementById('11').value == cor1 && document.getElementById('22').value == cor2 && document.getElementById('31').value == cor2) || document.getElementById('11').value == cor2 && document.getElementById('22').value == cor1 &&
+                            document.getElementById('31').value == cor2) {
+                                document.getElementById('21').value = cor2;
+                            }else if(document.getElementById('11').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('31').value == cor2){
+                                document.getElementById('21').value = cor2;
+                            }else{
+                                document.getElementById('21').value = cor1;
+                            }
+                        }else{
+                            if (document.getElementById('11').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('31').value == cor2) {
+                                document.getElementById('21').value = cor2;
+                            }
+                        }
+                        //Fim Teste
+                        //Teste Celula 22
+                        if (document.getElementById('22').value == cor2) {
+                            if (document.getElementById('12').value == cor2 && document.getElementById('21').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('32').value == cor2) {
+                                document.getElementById('22').value = cor1;
+                            }else if (document.getElementById('12').value == cor1 && document.getElementById('21').value == cor1 && document.getElementById('23').value == cor1 && document.getElementById('32').value == cor1) {   
+                                document.getElementById('22').value = cor1;
+                            }
+                        }else{
+                            if ((document.getElementById('21').value == cor1 && document.getElementById('12').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('32').value == cor2)||(document.getElementById('12').value == cor1 && document.getElementById('23').value == cor2 && document.getElementById('32').value == cor2 && document.getElementById('21').value == cor2)||(document.getElementById('23').value == cor1 && document.getElementById('32').value == cor2 && document.getElementById('21').value == cor2 && document.getElementById('12').value == cor2)||(document.getElementById('32').value == cor1 && document.getElementById('21').value == cor2 && document.getElementById('12').value == cor2 && document.getElementById('23').value == cor2)) {
+                                document.getElementById('22').value = cor2;
+                            }
+                        }
+                        //Fim Teste
+                        //Teste Celula 23
+                        if (document.getElementById('23').value == cor2) {
+                            if (document.getElementById('13').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('24').value == cor2 && document.getElementById('33').value == cor2) {
+                                document.getElementById('23').value = cor1;
+                            }else if (document.getElementById('13').value == cor1 && document.getElementById('22').value == cor1 && document.getElementById('24').value == cor1 && document.getElementById('33').value == cor1) {   
+                                document.getElementById('23').value = cor1;
+                            }
+                        }else{
+                            if ((document.getElementById('22').value == cor1 && document.getElementById('13').value == cor2 && document.getElementById('24').value == cor2 && document.getElementById('33').value == cor2)||(document.getElementById('13').value == cor1 && document.getElementById('24').value == cor2 && document.getElementById('33').value == cor2 && document.getElementById('22').value == cor2)||(document.getElementById('24').value == cor1 && document.getElementById('33').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('13').value == cor2)||(document.getElementById('33').value == cor1 && document.getElementById('22').value == cor2 && document.getElementById('13').value == cor2 && document.getElementById('24').value == cor2)) {
+                                document.getElementById('22').value = cor2;
+                            }
+                        }
+                        //Fim Teste
+                        //Teste Celula 24
+                        if (document.getElementById('24').value == cor2) {
+                            if ((document.getElementById('23').value == cor2 && document.getElementById('14').value == cor2 && document.getElementById('34').value == cor1)||(document.getElementById('14').value == cor1 && document.getElementById('23').value == cor2 && document.getElementById('34').value == cor2) || document.getElementById('34').value == cor2 && document.getElementById('23').value == cor1 &&
+                            document.getElementById('14').value == cor2) {
+                                document.getElementById('24').value = cor2;
+                            }else if(document.getElementById('14').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('34').value == cor2){
+                                document.getElementById('24').value = cor2;
+                            }else{
+                                document.getElementById('24').value = cor1;
+                            }
+                        }else{
+                            if (document.getElementById('14').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('34').value == cor2) {
+                                document.getElementById('22').value = cor2;
+                            }
+                        }
+                        //Fim Teste
+                        //Teste Celula 31
+                        if (document.getElementById('31').value == cor2) {
+                            if ((document.getElementById('21').value) == cor2 && document.getElementById('32').value == cor2) {
+                                document.getElementById('31').value = cor2;
+                            }else{
+                                document.getElementById('31').value = cor1;
+                            }   
+                        }
+                        //Fim Teste
+                        //Teste Celula 32
+                        if (document.getElementById('32').value == cor2) {
+                            if ((document.getElementById('33').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('31').value == cor1) || (document.getElementById('33').value == cor2 && document.getElementById('31').value == cor2 && document.getElementById('22').value == cor1) || (document.getElementById('31').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('33').value == cor1)) {
+                                document.getElementById('32').value = cor2;
+                            }else if (document.getElementById('31').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('33').value == cor2) {
+                                document.getElementById('32').value = cor2;
+                            }else{
+                                document.getElementById('32').value = cor1;
+                            }
+    
+                        }else{
+                            if (document.getElementById('31').value == cor2 && document.getElementById('22').value == cor2 && document.getElementById('33').value == cor2) {
+                                document.getElementById('32').value = cor2;
+                            }
+                        }
+                        //Fim Teste
+                        //Teste Celula 
+                        if (document.getElementById('33').value == cor2) {
+                            if ((document.getElementById('34').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('32').value == cor1) || (document.getElementById('34').value == cor2 && document.getElementById('32').value == cor2 && document.getElementById('23').value == cor1) || (document.getElementById('23').value == cor2 && document.getElementById('32').value == cor2 && document.getElementById('34').value == cor1)) {
+                                document.getElementById('33').value = cor2;
+                            }else if (document.getElementById('32').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('34').value == cor2) {
+                                document.getElementById('33').value = cor2;
+                            }else{
+                                document.getElementById('33').value = cor1;
+                            }
+    
+                        }else{
+                            if (document.getElementById('32').value == cor2 && document.getElementById('23').value == cor2 && document.getElementById('34').value == cor2) {
+                                document.getElementById('33').value = cor2;
+                            }
+                        }
+                        //Fim Teste
+                        //Teste Celula 34
+                        if (document.getElementById('34').value == cor2) {
+                            if (document.getElementById('33').value == cor2 && document.getElementById('24').value == cor2) {
+                                document.getElementById('34').value = cor2;
+                            }else{
+                                document.getElementById('34').value = cor1; 
+                            }
+                        }
+                        //Fim Teste
+                    
+            }
+            }
+            if (estado == 0) {
+                window.alert('Jogo Pausado');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,45 +1,13 @@
-# Jogo Da Vida Versão One Piece
+Regras 
+O universo do Jogo da Vida é uma grade ortogonal bidimensional infinita de células quadradas , cada uma das quais está em um dos dois estados possíveis, vivo ou morto (ou povoado e despovoado , respectivamente). Cada célula interage com seus oito vizinhos , que são as células que são adjacentes horizontalmente, verticalmente ou diagonalmente. A cada passo no tempo, ocorrem as seguintes transições:
 
-**Objetivo do Projeto**
+Qualquer célula viva com menos de dois vizinhos vivos morre, como se fosse subpopulação.
+Qualquer célula viva com dois ou três vizinhos vivos vive para a próxima geração.
+Qualquer célula viva com mais de três vizinhos vivos morre, como se por superpopulação.
+Qualquer célula morta com exatamente três vizinhos vivos torna-se uma célula viva, como se por reprodução.
+Essas regras, que comparam o comportamento do autômato com a vida real, podem ser condensadas no seguinte:
 
-  Criado na 2ª etapa do processo seletivo da Captalys Tech. Nessa fase, os candidatos devem implementar sua própria versão do Jogo da Vida, criado pelo matemático John Horton Conway em 1970.
-
-**Nível de Conhecimento Técnico**
-
-html, css, js e React: básico.
-
-**Status:** Em desenvolvimento.
-
-**Pendências:** 
-* Parte funcional do game;
-* Inclusão das peças do tabuleiro: ilhas, akuma no mi e piratas.
-* A implementação atual não se encontra em um estágio funcional!
-
-**Instalação:**
-
-1. Git Clone
-2. npm install
-3. npm run start
-
-## Regras do Jogo
-Inicialmente o tabuleiro é composto, quase totalmente, por blocos de água (representando os oceanos) e por uma faixa central de terra, representando a red line.
-
-O jogador deverá então definir quais blocos de água serão transformados em terra para formar as ilhas. Nesse processo, os jogadores deverão escolher o ou os tipos de ilha que deseja formar, são elas: 
-
-
-* Ilha whole cake: pode ter mais de 3 vizinhos porém não mais que 7;
-* Ilha Rusukaina: ninguém sobrevive aqui; 
-* lha Kuraigana: ilha solitária, só pode haver um pirata nessa ilha; 
-* Ilha Momoiro assim q cair aqui recebe um vizinho, se chegar a 5 morre;
-* Marinford: se tiver um grupo maior que 4 é considerado ataque e todos os membros são massacrados; de 2 a 3 considerado invasão, e eles são aprisionados na ilha; 1 é considerado infiltração bem sucedida, nada acontece;
-*	Laugh Tale: Só pode existir um único bloco dessa ilha, o primeiro pirata que passar por ela nunca mais morrerá de solidão;
-* No mar, são válidas as [regras do jogo da vida original](https://pt.wikipedia.org/wiki/Jogo_da_vida);
-*	Na red line são válidas todas as [regras do jogo original](https://pt.wikipedia.org/wiki/Jogo_da_vida) exceto a regra de morte por solidão.
-
-
-O jogador também poderá distribuir ao longo do tabuleiro akuma no mis. Cada pirata só pode possuir uma e, se a possuir, perde as habilidades de nadar. Assim, se este pirata estiver em um bloco de água, ele morre imediatamente.
-
-Após decidir as localizações e tipos das ilhas, o jogador irá “povoar” o mundo e só então que o jogo poderá ser iniciado.
-
-No arquivo Desafio Captalys, em pdf, as regras do jogo estão ilustradas a fim de melhorar a visualização e compreensão das mesmas.
-
+Qualquer célula viva com dois ou três vizinhos vivos sobrevive.
+Qualquer célula morta com três vizinhos vivos torna-se uma célula viva.
+Todas as outras células vivas morrem na próxima geração. Da mesma forma, todas as outras células mortas permanecem mortas.
+O padrão inicial constitui a semente do sistema. A primeira geração é criada aplicando as regras acima simultaneamente a todas as células da semente, vivas ou mortas; nascimentos e mortes ocorrem simultaneamente, e o momento discreto em que isso acontece às vezes é chamado de carrapato . [nb 1] Cada geração é uma função pura da anterior. As regras continuam a ser aplicadas repetidamente para criar novas gerações.
